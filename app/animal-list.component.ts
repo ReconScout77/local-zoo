@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Animal } from './animal.model';
 
 @Component({
@@ -16,6 +16,7 @@ import { Animal } from './animal.model';
           <th>Sex</th>
           <th>Likes</th>
           <th>Dislikes</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@ import { Animal } from './animal.model';
           <th>{{currentAnimal.sex}}</th>
           <th>{{currentAnimal.likes}}</th>
           <th>{{currentAnimal.dislikes}}</th>
+          <th><button class="btn btn-info" (click)="editButtonClicked(currentAnimal)">Edit</button></th>
         </tr>
       </tbody>
     </table>
@@ -37,4 +39,9 @@ import { Animal } from './animal.model';
 
 export class AnimalListComponent {
   @Input() childAnimalList: Animal[];
+  @Output() clickSenderEdit = new EventEmitter();
+
+  editButtonClicked(animalToEdit: Animal) {
+  this.clickSenderEdit.emit(animalToEdit);
+}
 }

@@ -4,6 +4,12 @@ import { Animal } from './animal.model';
 @Component({
   selector: 'animal-list',
   template: `
+    <label>Filter by: </label>
+    <select (change)="onChange($event.target.value)">
+      <option value="allAnimals" selected="selected">All Animals</option>
+      <option value="youngAnimals">Young Animals</option>
+      <option value="matureAnimals">Mature Animals</option>
+    </select>
     <table class="table" id="main-table">
       <thead>
         <tr>
@@ -20,7 +26,7 @@ import { Animal } from './animal.model';
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let currentAnimal of childAnimalList">
+        <tr *ngFor="let currentAnimal of childAnimalList | maturity: filterByMaturity">
           <th>{{currentAnimal.species}}</th>
           <th>{{currentAnimal.name}}</th>
           <th>{{currentAnimal.age}}</th>
@@ -40,8 +46,13 @@ import { Animal } from './animal.model';
 export class AnimalListComponent {
   @Input() childAnimalList: Animal[];
   @Output() clickSenderEdit = new EventEmitter();
+  filterByMaturity: string = "allAnimals";
 
   editButtonClicked(animalToEdit: Animal) {
-  this.clickSenderEdit.emit(animalToEdit);
-}
+    this.clickSenderEdit.emit(animalToEdit);
+  }
+
+  onChange(optionFromMenu) {
+    this.filterByMaturity = optionFromMenu;
+  }
 }

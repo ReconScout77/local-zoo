@@ -11,6 +11,9 @@ _A website that can track animals at the local zoo, allowing users to keep track
 ## Future Features
 
 * _Track which caretakers are taking care of which animals_
+* _Add admittance records_
+* _Filter by diet_
+* _Filter by species_
 
 ## Setup/Installation Requirements
 
